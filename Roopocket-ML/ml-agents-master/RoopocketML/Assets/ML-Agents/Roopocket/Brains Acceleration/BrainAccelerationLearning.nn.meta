@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 72a3abb1e79b46f44b99bdff5c5ac158
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400000: Assets/ML-Agents/Roopocket/Brains Acceleration/BrainAccelerationLearning.nn
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 83221ad3db87f4b3b91b041047cb2bc5, type: 3}
