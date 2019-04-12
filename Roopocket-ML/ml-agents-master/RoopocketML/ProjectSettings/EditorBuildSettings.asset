@@ -20,7 +20,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/ML-Agents/Roopocket/RoopocketTraining_Acceleration.unity
     guid: 80cccdbbc7545dd45aeb92879788f9f2
-  - enabled: 1
+  - enabled: 0
     path: Assets/ML-Agents/Roopocket/RoopocketTraining Float.unity
     guid: 800be92d568ea164ba93e881c54f6387
+  - enabled: 1
+    path: Assets/ML-Agents/Roopocket/RoopocketTraining_Navigation_Exec_Gen.unity
+    guid: 37f3ce9bc0953ec4d959f8a9969dc5a6
   m_configObjects: {}

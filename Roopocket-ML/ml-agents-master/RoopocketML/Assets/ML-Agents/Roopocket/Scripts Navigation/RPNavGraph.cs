@@ -161,21 +161,24 @@ public class RPNavGraph : MonoBehaviour
         return rpPath;
     }
 
-    public List<RPNavNode> GetPathTo(string from, string goal)
+    public RPNavNode GetNode(string stationName)
     {
-        RPNavNode fromNode = null;
-        RPNavNode toNode = null;
+        RPNavNode node = null;
         for (int i = 0; i < graph.Nodes.Count; i++)
         {
-            if (graph.Nodes[i].ID.nodeName == goal)
+            if (graph.Nodes[i].ID.nodeName == stationName)
             {
-                toNode = graph.Nodes[i].ID;
-            }
-            else if (graph.Nodes[i].ID.nodeName == from)
-            {
-                fromNode = graph.Nodes[i].ID;
+                node = graph.Nodes[i].ID;
             }
         }
+
+        return node;
+    }
+
+    public List<RPNavNode> GetPathTo(string from, string goal)
+    {
+        RPNavNode fromNode = GetNode(from);
+        RPNavNode toNode = GetNode(goal);
 
         if (fromNode != null && toNode != null)
         {
@@ -201,6 +204,14 @@ public class RPNavGraph : MonoBehaviour
         get
         {
             return graph;
+        }
+    }
+
+    public bool GraphReady
+    {
+        get
+        {
+            return graphMade;
         }
     }
 

@@ -33,13 +33,16 @@ public class Turner : MonoBehaviour {
             float curAngle = Vector2.Angle(toRocket, inVector);
 
 
-            if (insideCurve)
+            if (inRockets[i].GetComponent<RocketController>().IsKI == false)
             {
-                cmc.OffsetVector = new Vector3(toRocket.x * -1f, 0f, toRocket.y * -1f);
-            }
-            else
-            {
-                cmc.OffsetVector = new Vector3(toRocket.x * 1f, 0f, toRocket.y * 1f);
+                if (insideCurve)
+                {
+                    cmc.OffsetVector = new Vector3(toRocket.x * -1f, 0f, toRocket.y * -1f);
+                }
+                else
+                {
+                    cmc.OffsetVector = new Vector3(toRocket.x * 1f, 0f, toRocket.y * 1f);
+                }
             }
 
 

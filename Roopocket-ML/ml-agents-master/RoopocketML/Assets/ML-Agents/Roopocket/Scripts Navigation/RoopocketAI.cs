@@ -15,6 +15,8 @@ public class RoopocketAI : MonoBehaviour
 
     [SerializeField]
     private RPNavGraph graph;
+    [SerializeField]
+    private KIRocketNavPlanner kiNavPlanner;
 
     [SerializeField]
     private RoopocketFloatAgent flyAgent;
@@ -24,6 +26,8 @@ public class RoopocketAI : MonoBehaviour
     private Rigidbody rocketRB;
     [SerializeField]
     private RocketController rocketController;
+    [SerializeField]
+    private RocketProps rocketProps;
 
     private List<RPNavNode> currentPath = new List<RPNavNode>();
     private RPNavNode currentGoalFinal = null;
@@ -42,6 +46,32 @@ public class RoopocketAI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        // Blablabla
+
+
+        /*
+        // Da wird geschaut ob die Maus Taste gedrückt wird
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            // Hier wird eine Linie von der Kamera durch den Maus Zeiger auf die Szene gezogen, wenn was getroffen wird geht er in die if rein
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                // Hier holt man sich das Objekt das getroffen wurde und kann schauen, was für eins man getroffen, also quasi geklickt hat
+                GameObject getroffenesObjekt = hit.transform.gameObject;
+
+                // Zum Beispiel ist es ein Objekt mit dem Namen "Box Nummer 1"
+                if (getroffenesObjekt.name == "Box Nummer 1")
+                {
+                    // Mach blablabla
+                }
+            }
+        }
+        */
+
+
+
+
 		if (refreshGoal)
         {
             refreshGoal = false;
@@ -77,6 +107,11 @@ public class RoopocketAI : MonoBehaviour
             rocketController.SetThrust(1, false);
             rocketController.SetThrust(2, false);
             rocketController.SetThrust(3, false);
+
+
+            // TODO alter
+            int randGoal = Random.Range(0, kiNavPlanner.Stations.Count);
+            SetGoal(kiNavPlanner.Stations[randGoal]);
         }
         
         if (waitForLowVelocity)
@@ -88,6 +123,14 @@ public class RoopocketAI : MonoBehaviour
             }
         }
 	}
+
+    public bool IsLanded
+    {
+        get
+        {
+            return allOff;
+        }
+    }
 
     public void ReachedNode(RPNavNode node)
     {
@@ -103,6 +146,22 @@ public class RoopocketAI : MonoBehaviour
 
             updateTempGoal();
         }
+    }
+
+    public void SpawnAt(string station)
+    {
+        rocketProps.Repair();
+        rocketProps.Refill();
+
+        currentGoalFinal = graph.GetNode(station);
+        currentPath = new List<RPNavNode>();
+
+        rocketRB.transform.position = currentGoalFinal.transform.position;
+        rocketRB.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        rocketRB.velocity = Vector3.zero;
+        rocketRB.angularVelocity = Vector3.zero;
+
+        updateTempGoal();
     }
 
     public void SetGoal(string goal)

@@ -18,7 +18,7 @@ public class RocketProps : MonoBehaviour
     private float maxFuel = 200f;
     [SerializeField]
     private float thrustFuelPerSecond = 4f;
-
+    
     [Header("References")]
     [SerializeField]
     private Transform[] okToHitTransforms;
@@ -47,7 +47,7 @@ public class RocketProps : MonoBehaviour
         MLAccDamage = 0;
         currentHealth = maxHealth;
         currentFuel = maxFuel;
-        cameraMulti.IsRocketDead = false;
+        if (rocketController.IsKI == false) cameraMulti.IsRocketDead = false;
     }
 
     // Update is called once per frame
@@ -129,7 +129,7 @@ public class RocketProps : MonoBehaviour
         deadRocketInst.transform.position = transform.position;
         deadRocketInst.transform.rotation = transform.rotation;
 
-        cameraMulti.IsRocketDead = true;
+        if (rocketController.IsKI == false) cameraMulti.IsRocketDead = true;
 
         Destroy(explosion, 3.8f);
 
@@ -178,6 +178,19 @@ public class RocketProps : MonoBehaviour
         get;set;
     }
 
+
+    public void Repair()
+    {
+        gameObject.SetActive(true);
+        if (rocketController.IsKI == false) cameraMulti.IsRocketDead = false;
+        currentHealth = MaxHealth;
+
+    }
+
+    public void Refill()
+    {
+        currentFuel = MaxFuel;
+    }
 
 
 
