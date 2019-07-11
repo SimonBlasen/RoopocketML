@@ -195,7 +195,7 @@ public class RPNavGraph : MonoBehaviour
         if (nodes.Contains(node) == false)
         {
             nodes.Add(node);
-            Debug.Log("Node registered. Now amount: " + nodes.Count.ToString());
+            //Debug.Log("Node registered. Now amount: " + nodes.Count.ToString());
         }
     }
 
